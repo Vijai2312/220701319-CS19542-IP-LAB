@@ -1,0 +1,289 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        #searchResults {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f0fe;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Blood Bank Management System
+    </header>
+
+    <div class="container">
+        <!-- Patient Management Section -->
+        <div class="section">
+            <h2>Patient Management</h2>
+            <label for="patientName">Patient Name</label>
+            <input type="text" id="patientName" placeholder="Enter patient name" />
+
+            <label for="bloodType">Blood Type</label>
+            <select id="bloodType">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+
+            <label for="requiredUnits">Units of Blood Required</label>
+            <input type="number" id="requiredUnits" placeholder="Enter number of units" />
+
+            <label for="patientAddress">Address</label>
+            <input type="text" id="patientAddress" placeholder="Enter patient address" />
+
+            <label for="patientContact">Contact Number</label>
+            <input type="tel" id="patientContact" placeholder="Enter patient contact number" />
+
+            <button onclick="addPatient()">Add Patient</button>
+
+            <table id="patientTable">
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Blood Type</th>
+                        <th>Units Required</th>
+                        <th>Address</th>
+                        <th>Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Patient data will appear here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Donor Details Section -->
+        <div class="section">
+            <h2>Donor Details</h2>
+            <label for="donorName">Donor Name</label>
+            <input type="text" id="donorName" placeholder="Enter donor name" />
+
+            <label for="donorBloodType">Blood Type</label>
+            <select id="donorBloodType">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+
+            <label for="donorUnits">Units of Blood Donated</label>
+            <input type="number" id="donorUnits" placeholder="Enter number of units donated" />
+
+            <label for="donorAddress">Address</label>
+            <input type="text" id="donorAddress" placeholder="Enter donor address" />
+
+            <label for="donorContact">Contact Number</label>
+            <input type="tel" id="donorContact" placeholder="Enter donor contact number" />
+
+            <button onclick="addDonor()">Add Donor</button>
+
+            <table id="donorTable">
+                <thead>
+                    <tr>
+                        <th>Donor Name</th>
+                        <th>Blood Type</th>
+                        <th>Units Donated</th>
+                        <th>Address</th>
+                        <th>Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Donor data will appear here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Search Functionality -->
+        <div class="section">
+            <h2>Search for Compatible Donor</h2>
+            <label for="searchBloodType">Select Blood Type</label>
+            <select id="searchBloodType">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+
+            <button onclick="searchDonor()">Search Donor</button>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <script>
+        const donors = [];
+
+        function addPatient() {
+            const name = document.getElementById("patientName").value;
+            const bloodType = document.getElementById("bloodType").value;
+            const units = document.getElementById("requiredUnits").value;
+            const address = document.getElementById("patientAddress").value;
+            const contact = document.getElementById("patientContact").value;
+
+            if (name && bloodType && units && address && contact) {
+                const table = document.getElementById("patientTable").getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+                newRow.innerHTML = `<td>${name}</td><td>${bloodType}</td><td>${units}</td><td>${address}</td><td>${contact}</td>`;
+                
+                // Clear input fields
+                document.getElementById("patientName").value = "";
+                document.getElementById("bloodType").value = "A+";
+                document.getElementById("requiredUnits").value = "";
+                document.getElementById("patientAddress").value = "";
+                document.getElementById("patientContact").value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function addDonor() {
+            const name = document.getElementById("donorName").value;
+            const bloodType = document.getElementById("donorBloodType").value;
+            const units = document.getElementById("donorUnits").value;
+            const address = document.getElementById("donorAddress").value;
+            const contact = document.getElementById("donorContact").value;
+
+            if (name && bloodType && units && address && contact) {
+                const table = document.getElementById("donorTable").getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+                newRow.innerHTML = `<td>${name}</td><td>${bloodType}</td><td>${units}</td><td>${address}</td><td>${contact}</td>`;
+                
+                // Add donor data to donors array
+                donors.push({ name, bloodType, units, address, contact });
+                
+                // Clear input fields
+                document.getElementById("donorName").value = "";
+                document.getElementById("donorBloodType").value = "A+";
+                document.getElementById("donorUnits").value = "";
+                document.getElementById("donorAddress").value = "";
+                document.getElementById("donorContact").value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function searchDonor() {
+            const bloodType = document.getElementById("searchBloodType").value;
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = ""; // Clear previous results
+
+            // Filter donors based on blood type
+            const matchingDonors = donors.filter(donor => donor.bloodType === bloodType);
+            
+            if (matchingDonors.length > 0) {
+                matchingDonors.forEach(donor => {
+                    const donorInfo = document.createElement("div");
+                    donorInfo.innerText = `Donor Name: ${donor.name}, Units Donated: ${donor.units}, Contact: ${donor.contact}`;
+                    resultsDiv.appendChild(donorInfo);
+                });
+            } else {
+                resultsDiv.innerText = "No matching donors found.";
+            }
+        }
+    </script>
+</body>
+</html>
